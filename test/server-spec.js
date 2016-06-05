@@ -9,12 +9,11 @@ const request = supertest(app);
 describe('Body parser', () => {
   it('should be able to get query parameter', (done) => {
     request.get('/health')
-      .query({hello: 'world'})
         .expect(200)
       .end((err, res) => {
         if(err) return done(err);
 
-        res.body.hello.should.be.equal('world');
+        res.body.should.deep.be.equal({status: 'alive'});
 
         done();
       });
